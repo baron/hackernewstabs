@@ -565,15 +565,15 @@ their respective URLs."
          (comments-url (hackernews--comments-url id))
          )
     (push (list nil (vector (propertize (format hackernews-score-format score)
-                                  'face 'hackernews-score) (hackernews--button-string
-                       'hackernews-link
-                       (format hackernews-title-format title)
-                       (or item-url comments-url)
-                       id) (hackernews--button-string
-                       'hackernews-comment-count
-                       (format hackernews-comments-format (or descendants 0))
-                       comments-url
-                       id))) tabulated-list-entries)))
+                                        'face 'hackernews-score) (hackernews--button-string
+                                        'hackernews-link
+                                        (format hackernews-title-format title)
+                                        (or item-url comments-url)
+                                        id) (hackernews--button-string
+                                        'hackernews-comment-count
+                                        (format hackernews-comments-format (or descendants 0))
+                                        comments-url
+                                        id))) tabulated-list-entries)))
 
 (defun hackernews--display-items ()
   "Render items associated with, and pop to, the current buffer."
@@ -610,7 +610,7 @@ their respective URLs."
     ;; Render items
     ;; (run-hooks 'hackernews-before-render-hook)
     (tabulated-list-init-header)
-    (setq tabulated-list-entries nil)
+    ;; (setq tabulated-list-entries nil)
     (mapc #'hackernews--render-item items)
     ;; (setq tabulated-list-entries (list (list "1" [1 2 3])))
     ;; (setq tabulated-list-entries (list
@@ -626,41 +626,41 @@ their respective URLs."
 
 Summary of key bindings:
 
-key		binding
----		-------
+key             binding
+---             -------
 \\<hackernews-button-map>
 \\[push-button]\
-		Open link at point in default (external) browser.
+                Open link at point in default (external) browser.
 \\[hackernews-button-browse-internal]\
-		Open link at point in text-based browser within Emacs.
+                Open link at point in text-based browser within Emacs.
 \\<hackernews-mode-map>
 \\[hackernews-next-item]\
-		Move to next title link.
+                Move to next title link.
 \\[hackernews-previous-item]\
-		Move to previous title link.
+                Move to previous title link.
 \\[hackernews-next-comment]\
-		Move to next comments count link.
+                Move to next comments count link.
 \\[hackernews-previous-comment]\
-		Move to previous comments count link.
+                Move to previous comments count link.
 \\[hackernews-load-more-stories]\
-		Load more stories.
+                Load more stories.
 \\[hackernews-reload]\
-		Reload stories.
+                Reload stories.
 \\[hackernews-switch-feed]\
-		Prompt user for a feed to switch to.
+                Prompt user for a feed to switch to.
 \\[quit-window]\
-		Quit.
+                Quit.
 
 Official major mode key bindings:
 
 \\{hackernews-mode-map}"
   :group 'hackernews
   (setq tabulated-list-format [("Votes" 5 t)
-			       ("Title"   70 t)
-			       ("Comments"  15 t)])
+                               ("Title"   70 t)
+                               ("Comments"  15 t)])
   (setq tabulated-list-sort-key (cons "Votes" nil))
   (setq tabulated-list-padding 2)
-  ;; (setq tabulated-list-entries nil)
+  (setq tabulated-list-entries nil)
   ;; (tabulated-list-init-header)
   (setq hackernews--feed-state ())
   (setq truncate-lines t)
